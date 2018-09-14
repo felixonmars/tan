@@ -211,3 +211,16 @@ def test_type_comment_syntax_error() -> None:
     source, expected = read_data("type_comments", "type_comment_syntax_error")
     assert_format(source, expected)
     black.assert_equivalent(source, expected)
+
+
+@pytest.mark.parametrize("filename", ["long_first_line", "docstring_tabs"])
+def test_tabs(filename: str) -> None:
+    source, expected = read_data("tabs", filename)
+    mode = black.Mode(use_tabs=True)
+    assert_format(source, expected, mode)
+
+
+def test_line_length_tabs() -> None:
+    source, expected = read_data("tabs", "line_length_tabs")
+    mode = black.Mode(use_tabs=True, line_length=20)
+    assert_format(source, expected, mode)

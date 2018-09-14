@@ -422,10 +422,11 @@ class LineGenerator(Visitor[Line]):
             quote_len = 1 if docstring[1] != quote_char else 3
             docstring = docstring[quote_len:-quote_len]
             docstring_started_empty = not docstring
-            indent = " " * 4 * self.current_line.depth
+            indent_style = " " * 4 if not self.mode.use_tabs else "\t"
+            indent = indent_style * self.current_line.depth
 
             if is_multiline_string(leaf):
-                docstring = fix_docstring(docstring, indent)
+                docstring = fix_docstring(docstring, indent, not self.mode.use_tabs)
             else:
                 docstring = docstring.strip()
 
