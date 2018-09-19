@@ -40,7 +40,7 @@ Note that all command-line options listed above can also be configured using a
 Format the code passed in as a string.
 
 ```console
-$ black --code "print ( 'hello, world' )"
+$ tan --code "print ( 'hello, world' )"
 print("hello, world")
 ```
 
@@ -57,7 +57,7 @@ versions that your code supports. If you support Python 3.7 through 3.10, you sh
 write:
 
 ```console
-$ black -t py37 -t py38 -t py39 -t py310
+$ tan -t py37 -t py38 -t py39 -t py310
 ```
 
 In a [configuration file](#configuration-via-a-file), you can write:
@@ -72,17 +72,17 @@ after `*args` in a function call was added in Python 3.5, so _Black_ will add th
 only if the target versions are all Python 3.5 or higher:
 
 ```console
-$ black --line-length=10 --target-version=py35 -c 'f(a, *args)'
+$ tan --line-length=10 --target-version=py35 -c 'f(a, *args)'
 f(
     a,
     *args,
 )
-$ black --line-length=10 --target-version=py34 -c 'f(a, *args)'
+$ tan --line-length=10 --target-version=py34 -c 'f(a, *args)'
 f(
     a,
     *args
 )
-$ black --line-length=10 --target-version=py34 --target-version=py35 -c 'f(a, *args)'
+$ tan --line-length=10 --target-version=py34 --target-version=py35 -c 'f(a, *args)'
 f(
     a,
     *args
@@ -134,20 +134,20 @@ Passing `--check` will make _Black_ exit with:
 - code 123 if there was an internal error
 
 ```console
-$ black test.py --check
+$ tan test.py --check
 All done! ✨ 🍰 ✨
 1 file would be left unchanged.
 $ echo $?
 0
 
-$ black test.py --check
+$ tan test.py --check
 would reformat test.py
 Oh no! 💥 💔 💥
 1 file would be reformatted.
 $ echo $?
 1
 
-$ black test.py --check
+$ tan test.py --check
 error: cannot format test.py: INTERNAL ERROR: Black produced code that is not equivalent to the source.  Please report a bug on https://github.com/psf/black/issues.  This diff might be helpful: /tmp/blk_kjdr1oog.log
 Oh no! 💥 💔 💥
 1 file would fail to reformat.
@@ -163,7 +163,7 @@ would've made. They are printed to stdout so capturing them is simple.
 If you'd like colored diffs, you can enable them with `--color`.
 
 ```console
-$ black test.py --diff
+$ tan test.py --diff
 --- test.py     2021-03-08 22:23:40.848954+00:00
 +++ test.py     2021-03-08 22:23:47.126319+00:00
 @@ -1 +1 @@
@@ -192,20 +192,20 @@ of _Black_ may format code a little differently. This option can be set in a
 configuration file for consistent results across environments.
 
 ```console
-$ black --version
+$ tan --version
 black, 23.7.0 (compiled: yes)
-$ black --required-version 23.7.0 -c "format = 'this'"
+$ tan --required-version 23.7.0 -c "format = 'this'"
 format = "this"
-$ black --required-version 31.5b2 -c "still = 'beta?!'"
+$ tan --required-version 31.5b2 -c "still = 'beta?!'"
 Oh no! 💥 💔 💥 The required version does not match the running version!
 ```
 
 You can also pass just the major version:
 
 ```console
-$ black --required-version 22 -c "format = 'this'"
+$ tan --required-version 22 -c "format = 'this'"
 format = "this"
-$ black --required-version 31 -c "still = 'beta?!'"
+$ tan --required-version 31 -c "still = 'beta?!'"
 Oh no! 💥 💔 💥 The required version does not match the running version!
 ```
 
@@ -255,7 +255,7 @@ Passing `-q` / `--quiet` will cause _Black_ to stop emitting all non-critical ou
 Error messages will still be emitted (which can silenced by `2>/dev/null`).
 
 ```console
-$ black src/ -q
+$ tan src/ -q
 error: cannot format src/black_primer/cli.py: Cannot parse: 5:6: mport asyncio
 ```
 
@@ -266,7 +266,7 @@ were not changed or were ignored due to exclusion patterns. If _Black_ is using 
 configuration file, a blue message detailing which one it is using will be emitted.
 
 ```console
-$ black src/ -v
+$ tan src/ -v
 Using configuration from /tmp/pyproject.toml.
 src/blib2to3 ignored: matches the --extend-exclude regular expression
 src/_black_version.py wasn't modified on disk since last run.
@@ -284,8 +284,8 @@ Oh no! 💥 💔 💥
 You can check the version of _Black_ you have installed using the `--version` flag.
 
 ```console
-$ black --version
-black, 23.7.0
+$ tan --version
+tan, 23.7.0
 ```
 
 #### `--config`
@@ -316,7 +316,7 @@ _Black_ supports formatting code via stdin, with the result being printed to std
 Just let _Black_ know with `-` as the path.
 
 ```console
-$ echo "print ( 'hello, world' )" | black -
+$ echo "print ( 'hello, world' )" | tan -
 print("hello, world")
 reformatted -
 All done! ✨ 🍰 ✨
@@ -349,7 +349,7 @@ usefulness and conciseness. By default, _Black_ emits files modified and error m
 plus a short summary.
 
 ```console
-$ black src/
+$ tan src/
 error: cannot format src/black_primer/cli.py: Cannot parse: 5:6: mport asyncio
 reformatted src/black_primer/lib.py
 reformatted src/blackd/__init__.py
@@ -456,9 +456,9 @@ file hierarchy.
 
 ## Next steps
 
-A good next step would be configuring auto-discovery so `black .` is all you need
-instead of laborously listing every file or directory. You can get started by heading
-over to [File collection and discovery](./file_collection_and_discovery.md).
+A good next step would be configuring auto-discovery so `tan .` is all you need instead
+of laborously listing every file or directory. You can get started by heading over to
+[File collection and discovery](./file_collection_and_discovery.md).
 
 Another good choice would be setting up an
 [integration with your editor](../integrations/editors.md) of choice or with
